@@ -1,0 +1,84 @@
+#!/bin/bash                                                                                                                                                     
+cat << EOF >> "ws.conf"
+$(
+echo ""
+for i in {0..9}; do
+    for j in {0..9}; do
+        echo "mode \"ws$i$j\" {"
+            for k in {0..9}; do
+                if [ $i -eq 0 ] && [ $j -eq 0 ]; then
+                    echo "    bindsym $k mode default, workspace $k"
+                elif [ $i -eq 0 ]; then
+                    echo "    bindsym $k mode default, workspace $j$k"
+                else
+                    echo "    bindsym $k mode default, workspace $i$j$k"
+                fi
+            done
+            echo ""
+
+            for k in {0..9}; do
+                if [ $i -eq 0 ] && [ $j -eq 0 ]; then
+                    echo "    bindsym \$mod+$k mode default, workspace $k"
+                elif [ $i -eq 0 ]; then
+                    echo "    bindsym \$mod+$k mode default, workspace $j$k"
+                else
+                    echo "    bindsym \$mod+$k mode default, workspace $i$j$k"
+                fi
+            done
+            echo ""
+
+        if [ $i -eq 0 ]; then
+            echo "    bindsym Return mode default, workspace $j"
+        else
+            echo "    bindsym Return mode default, workspace $i$j"
+        fi
+        echo "    bindsym Escape mode default"
+        echo "}"
+        echo ""
+    done
+done
+)
+EOF
+
+cat << EOF >> "ws.conf"
+$(
+echo ""
+for i in {0..9}; do
+    echo "mode \"ws$i\" {"
+    for j in {0..9}; do
+        echo "    bindsym $j mode ws$i$j"
+    done
+    echo ""
+
+    for j in {0..9}; do
+        echo "    bindsym \$mod+$j mode ws$i$j"
+    done
+    echo ""
+
+    echo "    bindsym Return mode default, workspace $i"
+    echo "    bindsym Escape mode default"
+    echo "}"
+    echo ""
+done
+)
+EOF
+
+cat << EOF >> "ws.conf"
+$(
+echo ""
+for i in {0..9}; do
+    echo "bindsym \$mod+$i mode ws$i"
+done
+echo ""
+
+echo "bindsym \$mod+p workspace prev"
+echo "bindsym \$mod+n workspace next"
+echo ""
+
+echo "bindsym \$mod+Alt+\$up focus output up"
+echo "bindsym \$mod+Alt+\$down focus output down"
+echo "bindsym \$mod+Alt+\$left focus output left"
+echo "bindsym \$mod+Alt+\$right focus output right"
+echo ""
+)
+EOF
