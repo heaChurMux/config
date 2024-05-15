@@ -1,0 +1,100 @@
+#!/bin/bash                                                                                                                                                     
+cat << EOF >> "mvws.conf"
+$(
+echo ""
+for i in {0..9}; do
+    for j in {0..9}; do
+        echo "mode \"mvws$i$j\" {"
+            for k in {0..9}; do
+                if [ $i -eq 0 ] && [ $j -eq 0 ]; then
+                    echo "    bindsym $k mode default, move container to workspace $k"
+                elif [ $i -eq 0 ]; then
+                    echo "    bindsym $k mode default, move container to workspace $j$k"
+                else
+                    echo "    bindsym $k mode default, move container to workspace $i$j$k"
+                fi
+            done
+            echo ""
+
+            for k in {0..9}; do
+                if [ $i -eq 0 ] && [ $j -eq 0 ]; then
+                    echo "    bindsym \$mod+$k mode default, move container to workspace $k"
+                elif [ $i -eq 0 ]; then
+                    echo "    bindsym \$mod+$k mode default, move container to workspace $j$k"
+                else
+                    echo "    bindsym \$mod+$k mode default, move container to workspace $i$j$k"
+                fi
+            done
+            echo ""
+
+            for k in {0..9}; do
+                if [ $i -eq 0 ] && [ $j -eq 0 ]; then
+                    echo "    bindsym \$mod+Shift+$k mode default, move container to workspace $k"
+                elif [ $i -eq 0 ]; then
+                    echo "    bindsym \$mod+Shift+$k mode default, move container to workspace $j$k"
+                else
+                    echo "    bindsym \$mod+Shift+$k mode default, move container to workspace $i$j$k"
+                fi
+            done
+            echo ""
+
+        if [ $i -eq 0 ]; then
+            echo "    bindsym Return mode default, move container to workspace $j"
+        else
+            echo "    bindsym Return mode default, move container to workspace $i$j"
+        fi
+        echo "    bindsym Escape mode default"
+        echo "}"
+        echo ""
+    done
+done
+)
+EOF
+
+cat << EOF >> "mvws.conf"
+$(
+echo ""
+for i in {0..9}; do
+    echo "mode \"mvws$i\" {"
+    for j in {0..9}; do
+        echo "    bindsym $j mode mvws$i$j"
+    done
+    echo ""
+
+    for j in {0..9}; do
+        echo "    bindsym \$mod+$j mode mvws$i$j"
+    done
+    echo ""
+
+    for j in {0..9}; do
+        echo "    bindsym \$mod+Shift+$j mode mvws$i$j"
+    done
+    echo ""
+
+    echo "    bindsym Return mode default, move container to workspace $i"
+    echo "    bindsym Escape mode default"
+    echo "}"
+    echo ""
+done
+)
+EOF
+
+cat << EOF >> "mvws.conf"
+$(
+echo ""
+for i in {0..9}; do
+    echo "bindsym \$mod+Shift+$i mode mvws$i"
+done
+echo ""
+
+echo "bindsym \$mod+Shift+p move container to workspace prev"
+echo "bindsym \$mod+Shift+n move container to workspace next"
+echo ""
+
+echo "bindsym \$mod+Alt+Shift+\$up move container to output up"
+echo "bindsym \$mod+Alt+Shift+\$down move container to output down"
+echo "bindsym \$mod+Alt+Shift+\$left move container to output left"
+echo "bindsym \$mod+Alt+Shift+\$right move container to output right"
+echo ""
+)
+EOF
