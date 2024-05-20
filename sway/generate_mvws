@@ -40,10 +40,22 @@ for i in {0..9}; do
 
         if [ $i -eq 0 ]; then
             echo "    bindsym Return mode default, move container to workspace $j"
+            echo "    bindsym \$mod+Return mode default, move container to workspace $j"
+            echo "    bindsym \$mod+Shift+Return mode default, move container to workspace $j"
+            echo "    bindsym Backspace mode default"
+            echo "    bindsym \$mod+Backspace mode default"
+            echo "    bindsym \$mod+Shift+Backspace mode default"
         else
             echo "    bindsym Return mode default, move container to workspace $i$j"
+            echo "    bindsym \$mod+Return mode default, move container to workspace $i$j"
+            echo "    bindsym \$mod+Shift+Return mode default, move container to workspace $i$j"
+            echo "    bindsym Backspace mode \"ws$i$j\""
+            echo "    bindsym \$mod+Backspace mode \"ws$i$j\""
+            echo "    bindsym \$mod+Shift+Backspace mode \"ws$i$j\""
         fi
         echo "    bindsym Escape mode default"
+        echo "    bindsym \$mod+Escape mode default"
+        echo "    bindsym \$mod+Shift+Escape mode default"
         echo "}"
         echo ""
     done
@@ -72,7 +84,13 @@ for i in {0..9}; do
     echo ""
 
     echo "    bindsym Return mode default, move container to workspace $i"
+    echo "    bindsym \$mod+Return mode default, move container to workspace $i"
+    echo "    bindsym Backspace mode default"
+    echo "    bindsym \$mod+Backspace mode default"
+    echo "    bindsym \$mod+Shift+Backspace mode default"
     echo "    bindsym Escape mode default"
+    echo "    bindsym \$mod+Escape mode default"
+    echo "    bindsym \$mod+Shift+Escape mode default"
     echo "}"
     echo ""
 done
@@ -85,16 +103,6 @@ echo ""
 for i in {0..9}; do
     echo "bindsym \$mod+Shift+$i mode mvws$i"
 done
-echo ""
-
-echo "bindsym \$mod+Shift+p move container to workspace prev"
-echo "bindsym \$mod+Shift+n move container to workspace next"
-echo ""
-
-echo "bindsym \$mod+Alt+Shift+\$up move container to output up"
-echo "bindsym \$mod+Alt+Shift+\$down move container to output down"
-echo "bindsym \$mod+Alt+Shift+\$left move container to output left"
-echo "bindsym \$mod+Alt+Shift+\$right move container to output right"
 echo ""
 )
 EOF
