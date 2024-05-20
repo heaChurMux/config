@@ -29,10 +29,17 @@ for i in {0..9}; do
 
         if [ $i -eq 0 ]; then
             echo "    bindsym Return mode default, workspace $j"
+            echo "    bindsym \$mod+Return mode default, workspace $j"
+            echo "    bindsym Backspace mode default"
+            echo "    bindsym \$mod+Backspace mode default"
         else
             echo "    bindsym Return mode default, workspace $i$j"
+            echo "    bindsym \$mod+Return mode default, workspace $i$j"
+            echo "    bindsym Backspace mode \"ws$i\""
+            echo "    bindsym \$mod+Backspace mode \"ws$i\""
         fi
         echo "    bindsym Escape mode default"
+        echo "    bindsym \$mod+Escape mode default"
         echo "}"
         echo ""
     done
@@ -56,7 +63,11 @@ for i in {0..9}; do
     echo ""
 
     echo "    bindsym Return mode default, workspace $i"
+    echo "    bindsym \$mod+Return mode default, workspace $i"
+    echo "    bindsym Backspace mode default"
+    echo "    bindsym \$mod+Backspace mode default"
     echo "    bindsym Escape mode default"
+    echo "    bindsym \$mod+Escape mode default"
     echo "}"
     echo ""
 done
@@ -69,16 +80,6 @@ echo ""
 for i in {0..9}; do
     echo "bindsym \$mod+$i mode ws$i"
 done
-echo ""
-
-echo "bindsym \$mod+p workspace prev"
-echo "bindsym \$mod+n workspace next"
-echo ""
-
-echo "bindsym \$mod+Alt+\$up focus output up"
-echo "bindsym \$mod+Alt+\$down focus output down"
-echo "bindsym \$mod+Alt+\$left focus output left"
-echo "bindsym \$mod+Alt+\$right focus output right"
 echo ""
 )
 EOF
